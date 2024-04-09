@@ -5,10 +5,11 @@ const gaBaseData = {
     countryCode: "UK",
     language: null, // language code, can be string or null
     pageType: "PDP",
+    masId: "CPSA",
     isExp: true, // can be boolean or null
     isMobile: false
 };
-const { ticketNumber, recTitle, countryCode, language, pageType, isExp, isMobile } = gaBaseData;
+const { ticketNumber, recTitle, countryCode, language, pageType, masId, isExp, isMobile } = gaBaseData;
 
 // Array of events to be registered
 // Pageview events do not need an element as these will run as soon as createGAEvents function runs
@@ -29,7 +30,8 @@ let expLabel = "";
 if (typeof (isExp) === "boolean") {
     expLabel = isExp ? "-EXP" : "-CTRL"
 }
-const gaCategory = `MT-${ticketNumber}-${isMobile ? "M" : "DT"}${expLabel}`;
+
+const gaCategory = `MT-${ticketNumber}-${isMobile ? "M" : "DT"}${masId ? masId : ""}${expLabel}`;
 const baseLabel = `${pageType} | ${recTitle} | ${countryCode}${language ? " - " + language : ""}`;
 
 // Check which helper function is valid and use that for example
